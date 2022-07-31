@@ -29,4 +29,14 @@ public class Shop {
     public void removeItem(ISell item) {
         this.stockList.remove(item);
     }
+
+    public double calculatePotentialProfit() {
+       double profit = stockList
+                .stream()
+                .map(ISell::calculateMarkup)
+                .reduce(0.00, (a, b) -> {
+                    return a + b;
+                });
+       return profit;
+    }
 }
